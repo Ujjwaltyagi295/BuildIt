@@ -104,7 +104,9 @@ export default function Hero() {
         </div>
        
       </div>
-      <ScrollingText/>
+      <ScrollingText containerClassName={"absolute bottom-3 left-0 w-full bg-[#e6e6e6] text-black py-4 overflow-hidden z-20"} text={ 
+    "WEB DEVELOPMENT — APP DESIGN — BRAND STRATEGY — SOCIAL MEDIA MANAGEMENT — CREATIVE AGENCY — UI/UX DESIGN — DIGITAL MARKETING — INNOVATION — IDENTITY — GROWTH — CONTENT CREATION — BUILD IT —"
+}/>
     
     </section>
   );

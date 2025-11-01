@@ -3,7 +3,8 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
+import { motion } from "framer-motion";
+import Model from "./Model";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function TextRevealSection() {
@@ -61,7 +62,7 @@ export default function TextRevealSection() {
   return (
     <section
       ref={containerRef}
-      className="flex items-center justify-center min-h-screen px-6 md:px-12"
+      className="flex items-center flex-col justify-center min-h-screen px-6 md:px-12"
     >
 <h2
   ref={textRef}
@@ -72,7 +73,7 @@ We design feelings and craft immersive digital experiences <br/>
 web, app, social that spark ideas and make people go, Wow.
 </h2>
 
-
+   
     </section>
   );
 }
