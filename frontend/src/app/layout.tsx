@@ -14,6 +14,23 @@ const Integrated = localFont({
   display: 'swap',
 });
 
+const Helvetica = localFont({
+  src: [
+    {
+      path: './fonts/HelveticaNeueLight.otf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './fonts/HelveticaNeueBold.otf',
+      weight: '800',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-helvetica', // Use lowercase with --font- prefix
+  display: 'swap',
+});
+
 const ppMonument = localFont({
   src: [
     {
@@ -21,11 +38,8 @@ const ppMonument = localFont({
       weight: '400',
       style: 'normal',
     },
-    {
-      path: './fonts/MonumentExtended-Ultrabold.otf',
-      weight: '700',
-      style: 'normal',
-    },
+    
+  
   ],
   variable: '--font-pp-monument',
   display: 'swap',
@@ -62,7 +76,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${inter.variable} ${anton.variable} ${Integrated.variable} ${ppMonument.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${Helvetica.variable} ${inter.variable} ${anton.variable} ${Integrated.variable} ${ppMonument.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>

@@ -31,4 +31,8 @@ body {
   letter-spacing: -.04em;
 
     line-height: .9;
+}.title4 {
+  font-family: var(--font-helvetica), sans-serif;
+  text-transform: none;
+
 }

@@ -5,6 +5,8 @@ import Lenis from "lenis";
 import Hero from "./components/Hero";
 import TextRevealSection from "./components/TextRevealSection";
 import { SecondSection } from "./components/SecondSection";
+import ThirdSection from "./components/ThirdSection";
+import ProjectGrid from "./components/ProjectCards";
 
 export default function Home() {
   
@@ -35,6 +37,10 @@ export default function Home() {
       </div>
        <div className="">
  <SecondSection/>
+       </div>
+       <div className="mt-[30rem] bg-[#e6e6e6]  min-h-screen">
+          <ThirdSection/>
+           <ProjectGrid/>
        </div>
     </main>
   );

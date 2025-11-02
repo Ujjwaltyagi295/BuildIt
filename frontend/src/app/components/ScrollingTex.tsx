@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export default function ScrollingText({ 
   text, 
   containerClassName ,
-  textClassName = "font-Inter font-extrabold md:text-base text-[14px] px-2 leading-5 tracking-wide"
+  textClassName = "font-Inter font-extrabold md:text-base text-[14px] px-2  tracking-wide"
 }) {
 
   return (
