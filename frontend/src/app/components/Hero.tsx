@@ -85,7 +85,7 @@ export default function Hero() {
               muted
               playsInline
               className="w-full h-full object-cover"
-            >
+            > <source src="/BuildItcan.webm" type="video/webm" />
               <source src="/BuildItcan.mp4" type="video/mp4" />
             </video>
           </div>
@@ -99,7 +99,7 @@ export default function Hero() {
               muted
               playsInline
               className="w-full h-full object-cover"
-            >
+            >  <source src="/builditshoes.webm" type="video/webm" />
               <source src="/builditshoes.mp4" type="video/mp4" />
             </video>
           </div>

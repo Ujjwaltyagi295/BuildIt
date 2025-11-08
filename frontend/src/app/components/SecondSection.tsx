@@ -100,7 +100,7 @@ export const SecondSection = () => {
                             muted
                             playsInline
                             className="w-full h-full rounded-sm object-cover"
-                        >
+                        >  <source src="/mainvid.webm" type="video/webm" />
                             <source src="/mainvid.mp4" type="video/mp4" />
                         </video>
                     </div>
@@ -124,6 +124,7 @@ export const SecondSection = () => {
                             playsInline
                             className="w-full h-full rounded-sm object-cover"
                         >
+                             <source src="/bluecan.webm" type="video/webm" />
                             <source src="/bluecan.mp4" type="video/mp4" />
                         </video>
                     </div>
@@ -143,7 +144,8 @@ export const SecondSection = () => {
                             muted
                             playsInline
                             className="w-full h-full rounded-sm object-cover"
-                        >
+                        >   
+                            <source src="/fitnessweb.webm" type="video/webm" />
                             <source src="/fitnessweb.mp4" type="video/mp4" />
                         </video>
                     </div>
