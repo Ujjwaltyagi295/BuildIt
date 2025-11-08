@@ -75,7 +75,7 @@ export const SecondSection = () => {
     }, [])
     
     return (
-        <div className="relative h-screen mt-8 sm:mt-12 md:mt-16 lg:mt-20 flex items-start px-4 sm:px-8 lg:px-16"> 
+        <div className="relative h-screen  sm:mt-12 md:mt-16 lg:mt-20 flex items-start px-4 sm:px-8 lg:px-16"> 
     
             <div className="absolute 
                             top-[20%] sm:top-[18%] md:top-[8%] lg:top-[4%] 

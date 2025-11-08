@@ -60,9 +60,9 @@ export default function ThirdSection() {
   return (
     <section
       ref={containerRef}
-      className="relative flex items-center flex-col justify-center min-h-screen px-6 md:px-12"
+      className="relative flex items-center  flex-col justify-center min-h-screen px-6 md:px-12"
     >
-      <div className="absolute top-[70%] left-[5%] sm:left-[1%] md:left-[1%] lg:right-0 lg:top-[-5%] lg:left-[10%] -rotate-18 w-[13.75rem] h-[13.75rem] md:w-[10rem] md:h-[10rem] lg:w-[15rem] lg:h-[21.875rem] z-10 pointer-events-none">
+      <div className="absolute top-[5%] left-[5%] sm:left-[1%] md:left-[1%] lg:right-0 lg:top-[-5%] lg:left-[10%] -rotate-18 w-[13.75rem] h-[13.75rem] md:w-[10rem] md:h-[10rem] lg:w-[15rem] lg:h-[21.875rem] z-10 pointer-events-none">
 <svg 
   width="230" 
   height="228" 
