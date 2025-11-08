@@ -28,16 +28,12 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <Hero />
-      
-      {/* ADD THIS DIV TO TEST SCROLLING.
-        This makes the page 100vh taller, forcing a scrollbar.
-      */}
+     
          <div className="min-h-screen mt-52 bg-[#e6e6e6]">
           <TextRevealSection/>
-      </div>
-       <div className="">
+        </div>
  <SecondSection/>
-       </div>
+   
        <div className="mt-[30rem] bg-[#e6e6e6]  min-h-screen">
           <ThirdSection/>
            <ProjectGrid/>
