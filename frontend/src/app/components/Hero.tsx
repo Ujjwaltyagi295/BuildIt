@@ -5,8 +5,7 @@ import ScrollingText from "./ScrollingTex";
 
 export default function Hero() {
   return (
-   <section className="relative h-screen  flex items-start pt-12 px-8 lg:px-16">
-
+    <section className="relative h-screen flex items-start pt-12 px-8 lg:px-16">
       <button
         className="absolute top-3 right-4 lg:top-4 lg:right-8 bg-[#c5ee5b] text-black rounded-full font-bold lg:text-xl hover:bg-opacity-90 transition-all z-30
                   px-4 py-2 text-sm lg:px-8 lg:py-2 flex items-center justify-center"
@@ -14,8 +13,6 @@ export default function Hero() {
         menu
       </button>
       <div className="flex flex-col gap-6 lg:absolute lg:inset-0 w-full lg:w-auto z-10">
-        
-        
         <div className="lg:absolute lg:left-4 lg:mt-2 lg:top-12 lg:lg:ml-2 lg:lg:top-0">
           <h1 className="text-[16vw] title2 sm:text-[14vw] md:text-[12vw] lg:text-[180px] font-bold leading-[0.85] tracking-tight">
             Build.IT
@@ -63,6 +60,7 @@ export default function Hero() {
           />
         </svg>
       </div>
+      
       <div className="absolute top-[55%] right-[5%] md:top-[20%] sm:right-[8%] md:right-[3%] lg:top-[5%] lg:right-[8%] w-[17.5rem] sm:w-[18.75rem] md:w-[22rem] lg:w-[25rem] h-[34.375rem] sm:h-[35.625rem] md:h-[40rem] lg:h-[43.75rem] z-25">
         
         <div className="absolute right-0 bottom-[55%] lg:bottom-[60%] bg-white overflow-hidden shadow-2xl w-[11.875rem] sm:w-[12.5rem] md:w-[15rem] lg:w-[19.375rem] transform -rotate-10 hover:rotate-8 transition-transform z-10">
@@ -73,6 +71,7 @@ export default function Hero() {
               width={280}
               height={373}
               className="w-full h-full object-cover"
+              priority
             />
           </div>
         </div>
@@ -84,8 +83,11 @@ export default function Hero() {
               loop
               muted
               playsInline
+              preload="metadata"
+              poster="/BuildItcan-poster.jpg"
               className="w-full h-full object-cover"
-            > <source src="/BuildItcan.webm" type="video/webm" />
+            >
+              <source src="/BuildItcan.webm" type="video/webm" />
               <source src="/BuildItcan.mp4" type="video/mp4" />
             </video>
           </div>
@@ -98,17 +100,20 @@ export default function Hero() {
               loop
               muted
               playsInline
+              preload="metadata"
+              poster="/builditshoes-poster.jpg"
               className="w-full h-full object-cover"
-            >  <source src="/builditshoes.webm" type="video/webm" />
+            >
+              <source src="/builditshoes.webm" type="video/webm" />
               <source src="/builditshoes.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
       </div>
 
-      <ScrollingText 
-        textClassName="leading-5" 
-        containerClassName="absolute bottom-3 left-0 w-full bg-[#e6e6e6] text-black py-4 overflow-hidden z-20" 
+      <ScrollingText
+        textClassName="leading-5"
+        containerClassName="absolute bottom-3 left-0 w-full bg-[#e6e6e6] text-black py-4 overflow-hidden z-20"
         text="WEB DEVELOPMENT — APP DESIGN — BRAND STRATEGY — SOCIAL MEDIA MANAGEMENT — CREATIVE AGENCY — UI/UX DESIGN — DIGITAL MARKETING — INNOVATION — IDENTITY — GROWTH — CONTENT CREATION — BUILD IT —"
       />
     </section>

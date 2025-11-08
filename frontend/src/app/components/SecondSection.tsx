@@ -75,7 +75,7 @@ export const SecondSection = () => {
     }, [])
     
     return (
-        <div className="relative h-screen  sm:mt-12 md:mt-16 lg:mt-20 flex items-start px-4 sm:px-8 lg:px-16"> 
+        <div className="relative h-screen mt-8 sm:mt-12 md:mt-16 lg:mt-20 flex items-start px-4 sm:px-8 lg:px-16"> 
     
             <div className="absolute 
                             top-[20%] sm:top-[18%] md:top-[8%] lg:top-[4%] 
@@ -84,6 +84,7 @@ export const SecondSection = () => {
                             h-[85vh] sm:h-[75vh] md:h-[40rem] lg:h-[43.75rem] 
                             z-25">
                    
+             
                 <div 
                     ref={mainVidRef}
                     className="absolute 
@@ -99,14 +100,16 @@ export const SecondSection = () => {
                             loop
                             muted
                             playsInline
+                            preload="metadata"
+                            poster="/mainvid-poster.jpg"
                             className="w-full h-full rounded-sm object-cover"
-                        >  <source src="/mainvid.webm" type="video/webm" />
+                        >
+                            <source src="/mainvid.webm" type="video/webm" />
                             <source src="/mainvid.mp4" type="video/mp4" />
                         </video>
                     </div>
                 </div>
             
-                {/* Blue Can Video */}
                 <div 
                     ref={blueCanRef}
                     className="absolute 
@@ -122,15 +125,16 @@ export const SecondSection = () => {
                             loop
                             muted
                             playsInline
+                            preload="metadata"
+                            poster="/bluecan-poster.jpg"
                             className="w-full h-full rounded-sm object-cover"
                         >
-                             <source src="/bluecan.webm" type="video/webm" />
+                            <source src="/bluecan.webm" type="video/webm" />
                             <source src="/bluecan.mp4" type="video/mp4" />
                         </video>
                     </div>
                 </div>
                     
-                {/* Fitness Web Video */}
                 <div className="absolute 
                                 top-[18%] sm:top-[15%] md:top-[16%] lg:top-[5%]
                                 right-[48%] sm:right-[55%] md:right-[140%] lg:right-[250%]
@@ -143,8 +147,10 @@ export const SecondSection = () => {
                             loop
                             muted
                             playsInline
+                            preload="metadata"
+                            poster="/fitnessweb-poster.jpg"
                             className="w-full h-full rounded-sm object-cover"
-                        >   
+                        >
                             <source src="/fitnessweb.webm" type="video/webm" />
                             <source src="/fitnessweb.mp4" type="video/mp4" />
                         </video>
