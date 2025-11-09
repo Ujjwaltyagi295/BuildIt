@@ -2,65 +2,18 @@
 
 import Image from "next/image"
 import ScrollingText from "./ScrollingTex"
-import { useEffect, useRef } from "react"
 
 export default function Hero() {
-  const videoRefs = useRef<HTMLVideoElement[]>([])
-
-  const setVideoRef = (el: HTMLVideoElement | null) => {
-    if (el && !videoRefs.current.includes(el)) {
-      videoRefs.current.push(el)
-    }
-  }
-
-  useEffect(() => {
-    const videos = videoRefs.current
-    if (!videos.length) return
-
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          const video = entry.target as HTMLVideoElement
-          if (entry.isIntersecting) {
-            const sources = video.querySelectorAll("source[data-src]")
-            sources.forEach(source => {
-              source.setAttribute("src", source.getAttribute("data-src") || "")
-            })
-            video.load()
-            video.muted = true
-            video.play().catch(() => {})
-            observer.unobserve(video)
-          }
-        })
-      },
-      { 
-        rootMargin: '400px',
-        threshold: 0.01
-      }
-    )
-
-    videos.forEach(v => observer.observe(v))
-
-    return () => observer.disconnect()
-  }, [])
-
   const videoAttrs = {
     autoPlay: true,
     loop: true,
     muted: true,
     playsInline: true,
-    preload: "metadata" as const
+    preload: "auto" as const,
   }
 
   return (
     <section className="relative h-screen flex items-start pt-12 px-8 lg:px-16 ">
-      {/* <button
-        className="absolute top-3 right-4 lg:top-4 lg:right-8 bg-[#c5ee5b] text-black rounded-full font-bold hover:bg-opacity-90 transition-all z-30
-                   text-sm lg:text-xl px-4 py-2 lg:px-8 flex items-center justify-center"
-      >
-        menu
-      </button> */}
-
       <div className="flex flex-col gap-6 lg:absolute lg:inset-0 w-full lg:w-auto z-10">
         <div className="lg:absolute lg:left-4 lg:top-12">
           <h1 className="title2 font-bold leading-[0.85] tracking-tight text-[20vw] sm:text-[14vw] md:text-[12vw] lg:text-[180px]">
@@ -104,7 +57,6 @@ export default function Hero() {
       </div>
 
       <div className="absolute top-[55%] right-[5%] md:top-[20%] sm:right-[8%] md:right-[3%] lg:top-[5%] lg:right-[8%] w-[17.5rem] sm:w-[18.75rem] md:w-[22rem] lg:w-[25rem] h-[34.375rem] sm:h-[35.625rem] md:h-[40rem] lg:h-[43.75rem] z-25">
-
         <div className="absolute right-0 bottom-[55%] lg:bottom-[60%] bg-white overflow-hidden shadow-2xl w-[11.875rem] sm:w-[12.5rem] md:w-[15rem] lg:w-[19.375rem] transform -rotate-10 hover:rotate-8 transition-transform z-10">
           <div className="relative w-full aspect-[3/4]">
             <Image
@@ -121,13 +73,12 @@ export default function Hero() {
         <div className="absolute top-[18%] left-0 lg:top-[28%] bg-white overflow-hidden shadow-2xl w-[11.25rem] sm:w-[11.875rem] md:w-[14.5rem] lg:w-[20rem] transform rotate-4 hover:-rotate-3 transition-transform z-20 rounded-sm">
           <div className="relative w-full aspect-[3/4]">
             <video
-              ref={setVideoRef}
               {...videoAttrs}
               poster="/BuildItcan-poster.jpg"
               className="w-full h-full object-cover"
             >
-              <source data-src="/BuildItcan.webm" type="video/webm" />
-              <source data-src="/BuildItcan.mp4" type="video/mp4" />
+              <source src="/BuildItcan.webm" type="video/webm" />
+              <source src="/BuildItcan.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
@@ -135,13 +86,12 @@ export default function Hero() {
         <div className="absolute top-[48%] right-[55%] sm:right-[60%] md:right-[65%] lg:top-[68%] lg:right-[90%] bg-white overflow-hidden shadow-2xl w-[10.625rem] sm:w-[11.25rem] md:w-[14rem] lg:w-[20.625rem] transform -rotate-6 lg:rotate-6 hover:rotate-3 transition-transform z-30">
           <div className="relative w-full aspect-[6/7]">
             <video
-              ref={setVideoRef}
               {...videoAttrs}
               poster="/builditshoes-poster.jpg"
               className="w-full h-full object-cover"
             >
-              <source data-src="/builditshoes.webm" type="video/webm" />
-              <source data-src="/builditshoes.mp4" type="video/mp4" />
+              <source src="/builditshoes.webm" type="video/webm" />
+              <source src="/builditshoes.mp4" type="video/mp4" />
             </video>
           </div>
         </div>

@@ -77,3 +77,9 @@ web, app, social that spark ideas and make people go, Wow.
     </section>
   );
 }
+     {/* <button
+        className="absolute top-3 right-4 lg:top-4 lg:right-8 bg-[#c5ee5b] text-black rounded-full font-bold hover:bg-opacity-90 transition-all z-30
+                   text-sm lg:text-xl px-4 py-2 lg:px-8 flex items-center justify-center"
+      >
+        menu
+      </button> */}

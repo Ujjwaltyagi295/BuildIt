@@ -1,7 +1,9 @@
-"use client";
+"use client"
 
-import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
+import { useState } from "react"
+import Image from "next/image"
+import { useLazyVideo } from "../lib/hooks/useLazyVideo"
+
 
 export default function ProjectGrid() {
   const [projects] = useState([
@@ -46,23 +48,14 @@ export default function ProjectGrid() {
       type: "image",
       link: "https://bakery-umber-one.vercel.app/",
     },
-  ]);
+  ])
 
   const VideoComponent = ({ src, poster }) => {
-    const videoRef = useRef(null);
-
-    useEffect(() => {
-      if (videoRef.current) {
-        videoRef.current.play().catch((error) => {
-          console.log("Autoplay prevented:", error);
-        });
-      }
-    }, []);
+    const lazyVideoRef = useLazyVideo()
 
     return (
       <video
-        ref={videoRef}
-        autoPlay
+        ref={lazyVideoRef}
         muted
         loop
         playsInline
@@ -71,14 +64,14 @@ export default function ProjectGrid() {
         className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
         webkit-playsinline="true"
       >
-        <source src={src} type="video/mp4" />
+        <source data-src={src} type="video/mp4" />
       </video>
-    );
-  };
+    )
+  }
 
   const renderMedia = (project) => {
     if (project.type === "video") {
-      return <VideoComponent src={project.media} poster={project.poster} />;
+      return <VideoComponent src={project.media} poster={project.poster} />
     } else if (project.media) {
       return (
         <Image
@@ -92,7 +85,7 @@ export default function ProjectGrid() {
           decoding="async"
           className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
         />
-      );
+      )
     } else {
       return (
         <div className="w-full h-full bg-gradient-to-br from-neutral-900 to-neutral-800 flex flex-col justify-between p-8 lg:p-12">
@@ -105,9 +98,9 @@ export default function ProjectGrid() {
             <p className="text-sm lg:text-base">{project.subtitle}</p>
           </div>
         </div>
-      );
+      )
     }
-  };
+  }
 
   const renderProjectCard = (project) => (
     <a
@@ -122,7 +115,6 @@ export default function ProjectGrid() {
       <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none md:hidden" />
 
       <div className="absolute inset-0 flex flex-col justify-end md:justify-between px-8 pb-8 pt-6 lg:px-12 lg:pb-12 lg:pt-10 pointer-events-none">
-       
         <div className="text-white hidden md:block">
           <h3 className="text-3xl lg:text-5xl font-bold leading-tight whitespace-pre-line">
             {project.title}
@@ -130,22 +122,21 @@ export default function ProjectGrid() {
         </div>
 
         <div className="text-white relative z-10">
-      
           <h3 className="text-3xl font-bold leading-tight whitespace-pre-line mb-2 md:hidden">
             {project.title}
           </h3>
-        
+
           <p className="text-white/90 text-sm lg:text-base">
             {project.subtitle}
           </p>
         </div>
       </div>
     </a>
-  );
+  )
 
   const renderProjects = () => {
-    const elements = [];
-    let index = 0;
+    const elements = []
+    let index = 0
 
     while (index < projects.length) {
       if (index + 1 < projects.length && index % 3 !== 2) {
@@ -157,24 +148,24 @@ export default function ProjectGrid() {
             {renderProjectCard(projects[index])}
             {renderProjectCard(projects[index + 1])}
           </div>
-        );
-        index += 2;
+        )
+        index += 2
       } else {
         elements.push(
           <div key={`single-${index}`} className="mb-4 lg:mb-6">
             {renderProjectCard(projects[index])}
           </div>
-        );
-        index += 1;
+        )
+        index += 1
       }
     }
 
-    return elements;
-  };
+    return elements
+  }
 
   return (
     <section className="py-12 px-4 md:px-8 lg:px-12">
       <div className="max-w-[1600px] mx-auto">{renderProjects()}</div>
     </section>
-  );
+  )
 }

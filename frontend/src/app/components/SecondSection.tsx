@@ -5,6 +5,8 @@ import ScrollingText from "./ScrollingTex"
 import { useLayoutEffect, useRef, useEffect } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useLazyVideo } from "../lib/hooks/useLazyVideo"
+
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -12,44 +14,8 @@ export const SecondSection = () => {
   const mainVidRef = useRef<HTMLDivElement>(null)
   const blueCanRef = useRef<HTMLDivElement>(null)
   const scrollTextRef = useRef<HTMLDivElement>(null)
-  const videoRefs = useRef<HTMLVideoElement[]>([])
 
-  const setVideoRef = (el: HTMLVideoElement | null) => {
-    if (el && !videoRefs.current.includes(el)) {
-      videoRefs.current.push(el)
-    }
-  }
-
-  useEffect(() => {
-    const videos = videoRefs.current
-    if (!videos.length) return
-
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          const video = entry.target as HTMLVideoElement
-          if (entry.isIntersecting) {
-            const sources = video.querySelectorAll("source[data-src]")
-            sources.forEach(source => {
-              source.setAttribute("src", source.getAttribute("data-src") || "")
-            })
-            video.load()
-            video.muted = true
-            video.play().catch(() => {})
-            observer.unobserve(video)
-          }
-        })
-      },
-      { 
-        rootMargin: '400px',
-        threshold: 0.01
-      }
-    )
-
-    videos.forEach(v => observer.observe(v))
-
-    return () => observer.disconnect()
-  }, [])
+  const lazyVideoRef = useLazyVideo()
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -110,7 +76,6 @@ export const SecondSection = () => {
   }, [])
 
   const videoAttrs = {
-    autoPlay: true,
     loop: true,
     muted: true,
     playsInline: true,
@@ -137,10 +102,10 @@ export const SecondSection = () => {
             transform transition-transform z-20"
         >
           <div className="relative w-full p-2 sm:p-3 md:p-4 lg:p-5 bg-black/20 aspect-[3/4]">
-            <video 
-              ref={setVideoRef}
-              {...videoAttrs} 
-              poster="/mainvid-poster.jpg" 
+            <video
+              ref={lazyVideoRef}
+              {...videoAttrs}
+              poster="/mainvid-poster.jpg"
               className="w-full h-full rounded-sm object-cover"
             >
               <source data-src="/mainvid.webm" type="video/webm" />
@@ -159,10 +124,10 @@ export const SecondSection = () => {
             transform transition-transform z-30"
         >
           <div className="relative w-full aspect-[5/6]">
-            <video 
-              ref={setVideoRef}
-              {...videoAttrs} 
-              poster="/bluecan-poster.jpg" 
+            <video
+              ref={lazyVideoRef}
+              {...videoAttrs}
+              poster="/bluecan-poster.jpg"
               className="w-full h-full rounded-sm object-cover"
             >
               <source data-src="/bluecan.webm" type="video/webm" />
@@ -180,10 +145,10 @@ export const SecondSection = () => {
             transform -rotate-6 transition-transform z-20"
         >
           <div className="relative w-full aspect-[6/7]">
-            <video 
-              ref={setVideoRef}
-              {...videoAttrs} 
-              poster="/fitnessweb-poster.jpg" 
+            <video
+              ref={lazyVideoRef}
+              {...videoAttrs}
+              poster="/fitnessweb-poster.jpg"
               className="w-full h-full rounded-sm object-cover"
             >
               <source data-src="/fitnessweb.webm" type="video/webm" />
