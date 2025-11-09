@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+
 export default function ProjectGrid() {
   const [projects] = useState([
     {
@@ -9,8 +10,9 @@ export default function ProjectGrid() {
       title: "Velour",
       subtitle: "Clothing brand, Website",
       media: "/try.mp4",
+      poster: "/try-poster.jpg", // Added poster for video
       type: "video",
-      link: "https://example.com/velour"
+      link: "https://example.com/velour",
     },
     {
       id: 2,
@@ -18,7 +20,7 @@ export default function ProjectGrid() {
       subtitle: "Teachers | SME APP",
       media: "/drona.png",
       type: "image",
-      link: "https://example.com/pw-drona"
+      link: "https://example.com/pw-drona",
     },
     {
       id: 3,
@@ -26,7 +28,7 @@ export default function ProjectGrid() {
       subtitle: "Clothing Web",
       media: "/thrifty.png",
       type: "image",
-      link: "https://example.com/thriftyfy"
+      link: "https://example.com/thriftyfy",
     },
     {
       id: 4,
@@ -34,7 +36,7 @@ export default function ProjectGrid() {
       subtitle: "Wires And Cables",
       media: "/millionwires.png",
       type: "image",
-      link: "https://example.com/millionwires"
+      link: "https://example.com/millionwires",
     },
     {
       id: 5,
@@ -42,13 +44,9 @@ export default function ProjectGrid() {
       subtitle: "Bakery website",
       media: "/bakery.png",
       type: "image",
-      link: "https://example.com/bakery"
+      link: "https://example.com/bakery",
     },
   ]);
-
-  const getWebPPath = (imagePath) => {
-    return imagePath.replace(/\.(png|jpg|jpeg)$/i, '.webp');
-  };
 
   const renderMedia = (project) => {
     if (project.type === "video") {
@@ -59,24 +57,24 @@ export default function ProjectGrid() {
           muted
           loop
           playsInline
+          poster={project.poster} // Use a poster image
+          preload="metadata" // Only load metadata initially
           className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
         />
       );
     } else if (project.media) {
-      const webpPath = getWebPPath(project.media);
       return (
-        <picture className="absolute inset-0 w-full h-full">
-          <source srcSet={webpPath} type="image/webp" />
-          <Image
-            src={project.media}
-            alt={project.title}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 800px"
-            quality={85}
-            priority={project.id <= 2}
-            className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-          />
-        </picture>
+        <Image
+          src={project.media}
+          alt={project.title}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 800px"
+          quality={85}
+          loading="lazy"
+          fetchPriority="low"
+          decoding="async"
+          className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+        />
       );
     } else {
       return (
@@ -104,7 +102,8 @@ export default function ProjectGrid() {
     >
       {renderMedia(project)}
 
-      <div className="absolute inset-0 flex flex-col justify-between p-8 lg:p-12 pointer-events-none">
+      {/* UPDATED: Reduced top padding to move title up */}
+      <div className="absolute inset-0 flex flex-col justify-between px-8 pb-8 pt-6 lg:px-12 lg:pb-12 lg:pt-10 pointer-events-none">
         <div className="text-white">
           <h3 className="text-3xl lg:text-5xl font-bold leading-tight whitespace-pre-line">
             {project.title}
@@ -126,7 +125,10 @@ export default function ProjectGrid() {
     while (index < projects.length) {
       if (index + 1 < projects.length && index % 3 !== 2) {
         elements.push(
-          <div key={`pair-${index}`} className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mb-4 lg:mb-6">
+          <div
+            key={`pair-${index}`}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mb-4 lg:mb-6"
+          >
             {renderProjectCard(projects[index])}
             {renderProjectCard(projects[index + 1])}
           </div>
@@ -147,9 +149,7 @@ export default function ProjectGrid() {
 
   return (
     <section className="py-12 px-4 md:px-8 lg:px-12">
-      <div className="max-w-[1600px] mx-auto">
-        {renderProjects()}
-      </div>
+      <div className="max-w-[1600px] mx-auto">{renderProjects()}</div>
     </section>
   );
 }

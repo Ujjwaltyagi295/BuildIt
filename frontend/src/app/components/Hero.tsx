@@ -54,12 +54,12 @@ export default function Hero() {
 
   return (
     <section className="relative h-screen flex items-start pt-12 px-8 lg:px-16 ">
-      <button
+      {/* <button
         className="absolute top-3 right-4 lg:top-4 lg:right-8 bg-[#c5ee5b] text-black rounded-full font-bold hover:bg-opacity-90 transition-all z-30
                    text-sm lg:text-xl px-4 py-2 lg:px-8 flex items-center justify-center"
       >
         menu
-      </button>
+      </button> */}
 
       <div className="flex flex-col gap-6 lg:absolute lg:inset-0 w-full lg:w-auto z-10">
         <div className="lg:absolute lg:left-4 lg:top-12">
