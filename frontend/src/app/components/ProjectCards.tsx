@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 
 export default function ProjectGrid() {
@@ -10,9 +10,9 @@ export default function ProjectGrid() {
       title: "Velour",
       subtitle: "Clothing brand, Website",
       media: "/try.mp4",
-      poster: "/try-poster.jpg", // Added poster for video
+      poster: "/try-poster.jpg",
       type: "video",
-      link: "https://example.com/velour",
+      link: "https://velour-rho.vercel.app/",
     },
     {
       id: 2,
@@ -20,7 +20,7 @@ export default function ProjectGrid() {
       subtitle: "Teachers | SME APP",
       media: "/drona.png",
       type: "image",
-      link: "https://example.com/pw-drona",
+      link: "https://play.google.com/store/apps/details?id=co.penpencil.pwdronaapp&hl=en_IN",
     },
     {
       id: 3,
@@ -28,7 +28,7 @@ export default function ProjectGrid() {
       subtitle: "Clothing Web",
       media: "/thrifty.png",
       type: "image",
-      link: "https://example.com/thriftyfy",
+      link: "https://thriftify-india.vercel.app/",
     },
     {
       id: 4,
@@ -36,7 +36,7 @@ export default function ProjectGrid() {
       subtitle: "Wires And Cables",
       media: "/millionwires.png",
       type: "image",
-      link: "https://example.com/millionwires",
+      link: "https://millionwires.pages.dev/",
     },
     {
       id: 5,
@@ -44,24 +44,41 @@ export default function ProjectGrid() {
       subtitle: "Bakery website",
       media: "/bakery.png",
       type: "image",
-      link: "https://example.com/bakery",
+      link: "https://bakery-umber-one.vercel.app/",
     },
   ]);
 
+  const VideoComponent = ({ src, poster }) => {
+    const videoRef = useRef(null);
+
+    useEffect(() => {
+      if (videoRef.current) {
+        videoRef.current.play().catch((error) => {
+          console.log("Autoplay prevented:", error);
+        });
+      }
+    }, []);
+
+    return (
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster={poster}
+        preload="metadata"
+        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+        webkit-playsinline="true"
+      >
+        <source src={src} type="video/mp4" />
+      </video>
+    );
+  };
+
   const renderMedia = (project) => {
     if (project.type === "video") {
-      return (
-        <video
-          src={project.media}
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster={project.poster} // Use a poster image
-          preload="metadata" // Only load metadata initially
-          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-        />
-      );
+      return <VideoComponent src={project.media} poster={project.poster} />;
     } else if (project.media) {
       return (
         <Image
@@ -102,14 +119,22 @@ export default function ProjectGrid() {
     >
       {renderMedia(project)}
 
-      {/* UPDATED: Reduced top padding to move title up */}
-      <div className="absolute inset-0 flex flex-col justify-between px-8 pb-8 pt-6 lg:px-12 lg:pb-12 lg:pt-10 pointer-events-none">
-        <div className="text-white">
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none md:hidden" />
+
+      <div className="absolute inset-0 flex flex-col justify-end md:justify-between px-8 pb-8 pt-6 lg:px-12 lg:pb-12 lg:pt-10 pointer-events-none">
+       
+        <div className="text-white hidden md:block">
           <h3 className="text-3xl lg:text-5xl font-bold leading-tight whitespace-pre-line">
             {project.title}
           </h3>
         </div>
-        <div className="text-white">
+
+        <div className="text-white relative z-10">
+      
+          <h3 className="text-3xl font-bold leading-tight whitespace-pre-line mb-2 md:hidden">
+            {project.title}
+          </h3>
+        
           <p className="text-white/90 text-sm lg:text-base">
             {project.subtitle}
           </p>
