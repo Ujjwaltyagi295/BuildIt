@@ -15,7 +15,7 @@ export default function ProjectGrid() {
     {
       id: 2,
       title: "PW\nDrona",
-      subtitle: "Teachers | SME",
+      subtitle: "Teachers | SME APP",
       media: "/drona.png",
       type: "image",
       link: "https://example.com/pw-drona"
@@ -100,7 +100,7 @@ export default function ProjectGrid() {
       target="_blank"
       rel="noopener noreferrer"
       key={project.id}
-      className="group relative overflow-hidden rounded-2xl lg:rounded-3xl h-[500px] md:h-[600px] lg:h-[700px] cursor-pointer block"
+      className="group relative overflow-hidden rounded-2xl lg:rounded-3xl h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] cursor-pointer block"
     >
       {renderMedia(project)}
 
