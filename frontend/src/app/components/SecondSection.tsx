@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import ScrollingText from "./ScrollingTex"
-import { useLayoutEffect, useRef } from "react"
+import { useLayoutEffect, useRef, useEffect } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
@@ -12,6 +12,44 @@ export const SecondSection = () => {
   const mainVidRef = useRef<HTMLDivElement>(null)
   const blueCanRef = useRef<HTMLDivElement>(null)
   const scrollTextRef = useRef<HTMLDivElement>(null)
+  const videoRefs = useRef<HTMLVideoElement[]>([])
+
+  const setVideoRef = (el: HTMLVideoElement | null) => {
+    if (el && !videoRefs.current.includes(el)) {
+      videoRefs.current.push(el)
+    }
+  }
+
+  useEffect(() => {
+    const videos = videoRefs.current
+    if (!videos.length) return
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          const video = entry.target as HTMLVideoElement
+          if (entry.isIntersecting) {
+            const sources = video.querySelectorAll("source[data-src]")
+            sources.forEach(source => {
+              source.setAttribute("src", source.getAttribute("data-src") || "")
+            })
+            video.load()
+            video.muted = true
+            video.play().catch(() => {})
+            observer.unobserve(video)
+          }
+        })
+      },
+      { 
+        rootMargin: '400px',
+        threshold: 0.01
+      }
+    )
+
+    videos.forEach(v => observer.observe(v))
+
+    return () => observer.disconnect()
+  }, [])
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -76,12 +114,11 @@ export const SecondSection = () => {
     loop: true,
     muted: true,
     playsInline: true,
-    preload: "auto",
-  } as const
+    preload: "metadata" as const,
+  }
 
   return (
     <div className="relative h-screen mt-8 sm:mt-12 md:mt-16 lg:mt-20 flex items-start px-4 sm:px-8 lg:px-16">
-      {/* Wrapper */}
       <div
         className="absolute 
           top-[20%] sm:top-[18%] md:top-[8%] lg:top-[4%] 
@@ -90,7 +127,6 @@ export const SecondSection = () => {
           h-[85vh] sm:h-[75vh] md:h-[40rem] lg:h-[43.75rem] 
           z-25"
       >
-        {/* Main Video */}
         <div
           ref={mainVidRef}
           className="absolute 
@@ -101,14 +137,18 @@ export const SecondSection = () => {
             transform transition-transform z-20"
         >
           <div className="relative w-full p-2 sm:p-3 md:p-4 lg:p-5 bg-black/20 aspect-[3/4]">
-            <video {...videoAttrs} poster="/mainvid-poster.jpg" className="w-full h-full rounded-sm object-cover">
-              <source src="/mainvid.webm" type="video/webm" />
-              <source src="/mainvid.mp4" type="video/mp4" />
+            <video 
+              ref={setVideoRef}
+              {...videoAttrs} 
+              poster="/mainvid-poster.jpg" 
+              className="w-full h-full rounded-sm object-cover"
+            >
+              <source data-src="/mainvid.webm" type="video/webm" />
+              <source data-src="/mainvid.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
 
-        {/* Blue Can Video */}
         <div
           ref={blueCanRef}
           className="absolute 
@@ -119,14 +159,18 @@ export const SecondSection = () => {
             transform transition-transform z-30"
         >
           <div className="relative w-full aspect-[5/6]">
-            <video {...videoAttrs} poster="/bluecan-poster.jpg" className="w-full h-full rounded-sm object-cover">
-              <source src="/bluecan.webm" type="video/webm" />
-              <source src="/bluecan.mp4" type="video/mp4" />
+            <video 
+              ref={setVideoRef}
+              {...videoAttrs} 
+              poster="/bluecan-poster.jpg" 
+              className="w-full h-full rounded-sm object-cover"
+            >
+              <source data-src="/bluecan.webm" type="video/webm" />
+              <source data-src="/bluecan.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
 
-        {/* Fitness Video */}
         <div
           className="absolute 
             top-[18%] sm:top-[15%] md:top-[16%] lg:top-[5%]
@@ -136,15 +180,19 @@ export const SecondSection = () => {
             transform -rotate-6 transition-transform z-20"
         >
           <div className="relative w-full aspect-[6/7]">
-            <video {...videoAttrs} poster="/fitnessweb-poster.jpg" className="w-full h-full rounded-sm object-cover">
-              <source src="/fitnessweb.webm" type="video/webm" />
-              <source src="/fitnessweb.mp4" type="video/mp4" />
+            <video 
+              ref={setVideoRef}
+              {...videoAttrs} 
+              poster="/fitnessweb-poster.jpg" 
+              className="w-full h-full rounded-sm object-cover"
+            >
+              <source data-src="/fitnessweb.webm" type="video/webm" />
+              <source data-src="/fitnessweb.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
       </div>
 
-      {/* Mid Scrolling Text */}
       <ScrollingText
         textClassName="leading-tight sm:leading-5"
         containerClassName="absolute 
@@ -154,7 +202,6 @@ export const SecondSection = () => {
         text="BUILD IT — BUILD IT — BUILD IT — BUILD IT — BUILD IT — BUILD IT — BUILD IT — BUILD IT — BUILD IT — BUILD IT — BUILD IT — BUILD IT —"
       />
 
-      {/* Bottom Scrolling Text */}
       <div
         className="absolute 
           bottom-[-75%] sm:bottom-[-70%] md:bottom-[-40%] lg:bottom-[-30%]

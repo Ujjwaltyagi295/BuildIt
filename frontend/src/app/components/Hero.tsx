@@ -5,13 +5,14 @@ import ScrollingText from "./ScrollingTex"
 import { useEffect, useRef } from "react"
 
 export default function Hero() {
-const videoRefs = useRef<HTMLVideoElement[]>([])
+  const videoRefs = useRef<HTMLVideoElement[]>([])
 
-const setVideoRef = (el: HTMLVideoElement | null) => {
-  if (el && !videoRefs.current.includes(el)) {
-    videoRefs.current.push(el)
+  const setVideoRef = (el: HTMLVideoElement | null) => {
+    if (el && !videoRefs.current.includes(el)) {
+      videoRefs.current.push(el)
+    }
   }
-}
+
   useEffect(() => {
     const videos = videoRefs.current
     if (!videos.length) return
@@ -21,37 +22,38 @@ const setVideoRef = (el: HTMLVideoElement | null) => {
         entries.forEach(entry => {
           const video = entry.target as HTMLVideoElement
           if (entry.isIntersecting) {
-         
             const sources = video.querySelectorAll("source[data-src]")
             sources.forEach(source => {
               source.setAttribute("src", source.getAttribute("data-src") || "")
             })
             video.load()
-
             video.muted = true
             video.play().catch(() => {})
             observer.unobserve(video)
           }
         })
       },
-      { threshold: 0.25 }
+      { 
+        rootMargin: '400px',
+        threshold: 0.01
+      }
     )
 
     videos.forEach(v => observer.observe(v))
 
     return () => observer.disconnect()
   }, [])
+
   const videoAttrs = {
     autoPlay: true,
     loop: true,
     muted: true,
     playsInline: true,
-    preload: "none" 
-  } as const
+    preload: "metadata" as const
+  }
 
   return (
     <section className="relative h-screen flex items-start pt-12 px-8 lg:px-16 ">
-   
       <button
         className="absolute top-3 right-4 lg:top-4 lg:right-8 bg-[#c5ee5b] text-black rounded-full font-bold hover:bg-opacity-90 transition-all z-30
                    text-sm lg:text-xl px-4 py-2 lg:px-8 flex items-center justify-center"
@@ -115,11 +117,12 @@ const setVideoRef = (el: HTMLVideoElement | null) => {
             />
           </div>
         </div>
+
         <div className="absolute top-[18%] left-0 lg:top-[28%] bg-white overflow-hidden shadow-2xl w-[11.25rem] sm:w-[11.875rem] md:w-[14.5rem] lg:w-[20rem] transform rotate-4 hover:-rotate-3 transition-transform z-20 rounded-sm">
           <div className="relative w-full aspect-[3/4]">
             <video
               ref={setVideoRef}
-  {...videoAttrs}
+              {...videoAttrs}
               poster="/BuildItcan-poster.jpg"
               className="w-full h-full object-cover"
             >
@@ -132,8 +135,8 @@ const setVideoRef = (el: HTMLVideoElement | null) => {
         <div className="absolute top-[48%] right-[55%] sm:right-[60%] md:right-[65%] lg:top-[68%] lg:right-[90%] bg-white overflow-hidden shadow-2xl w-[10.625rem] sm:w-[11.25rem] md:w-[14rem] lg:w-[20.625rem] transform -rotate-6 lg:rotate-6 hover:rotate-3 transition-transform z-30">
           <div className="relative w-full aspect-[6/7]">
             <video
-             ref={setVideoRef}
-  {...videoAttrs}
+              ref={setVideoRef}
+              {...videoAttrs}
               poster="/builditshoes-poster.jpg"
               className="w-full h-full object-cover"
             >
