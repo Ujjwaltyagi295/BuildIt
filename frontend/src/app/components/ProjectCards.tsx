@@ -1,9 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect, useState as useReactState } from "react"
 import Image from "next/image"
-import { useLazyVideo } from "../lib/hooks/useLazyVideo"
-
 
 export default function ProjectGrid() {
   const [projects] = useState([
@@ -49,26 +47,46 @@ export default function ProjectGrid() {
       link: "https://bakery-umber-one.vercel.app/",
     },
   ])
-
   const VideoComponent = ({ src, poster }) => {
-    const lazyVideoRef = useLazyVideo()
+    const videoRef = useRef(null)
+    const [isLoaded, setIsLoaded] = useReactState(false)
+
+    useEffect(() => {
+      const video = videoRef.current
+      if (!video) return
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              video.src = src
+              video.load()
+              observer.disconnect()
+            }
+          })
+        },
+        { threshold: 0.25 }
+      )
+
+      observer.observe(video)
+      return () => observer.disconnect()
+    }, [src])
 
     return (
       <video
-        ref={lazyVideoRef}
+        ref={videoRef}
         muted
         loop
         playsInline
-        poster={poster}
         preload="metadata"
-        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-        webkit-playsinline="true"
-      >
-        <source data-src={src} type="video/mp4" />
-      </video>
+        poster={poster}
+        onCanPlay={() => setIsLoaded(true)}
+        className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-105 ${
+          isLoaded ? "opacity-100" : "opacity-0"
+        }`}
+      />
     )
   }
-
   const renderMedia = (project) => {
     if (project.type === "video") {
       return <VideoComponent src={project.media} poster={project.poster} />
@@ -101,7 +119,6 @@ export default function ProjectGrid() {
       )
     }
   }
-
   const renderProjectCard = (project) => (
     <a
       href={project.link}
@@ -125,10 +142,7 @@ export default function ProjectGrid() {
           <h3 className="text-3xl font-bold leading-tight whitespace-pre-line mb-2 md:hidden">
             {project.title}
           </h3>
-
-          <p className="text-white/90 text-sm lg:text-base">
-            {project.subtitle}
-          </p>
+          <p className="text-white/90 text-sm lg:text-base">{project.subtitle}</p>
         </div>
       </div>
     </a>
