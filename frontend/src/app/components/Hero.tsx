@@ -1,7 +1,62 @@
 "use client"
 
 import Image from "next/image"
+import { useState, useRef, useEffect } from "react"
 import ScrollingText from "./ScrollingTex"
+
+function VideoWithFallback({ src, poster, frameSrc, className, videoAttrs }) {
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false)
+  const videoRef = useRef(null)
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    const handleLoadedData = () => {
+      setIsVideoLoaded(true)
+    }
+
+    // Check if video is already loaded (cached)
+    if (video.readyState >= 2) {
+      setIsVideoLoaded(true)
+    }
+
+    video.addEventListener('loadeddata', handleLoadedData)
+    
+    // Attempt to play video explicitly
+    video.play().catch(error => {
+      console.log("Video autoplay failed:", error)
+    })
+
+    return () => {
+      video.removeEventListener('loadeddata', handleLoadedData)
+    }
+  }, [])
+
+  return (
+    <div className="relative w-full h-full">
+      {!isVideoLoaded && (
+        <Image
+          src={frameSrc}
+          alt="Loading preview"
+          fill
+          className={className}
+          priority
+        />
+      )}
+      <video
+        ref={videoRef}
+        {...videoAttrs}
+        poster={poster}
+        className={className}
+        style={{ opacity: isVideoLoaded ? 1 : 0 }}
+      >
+        <source src={src.replace('.mp4', '.webm')} type="video/webm" />
+        <source src={src} type="video/mp4" />
+      </video>
+    </div>
+  )
+}
 
 export default function Hero() {
   const videoAttrs = {
@@ -72,27 +127,25 @@ export default function Hero() {
 
         <div className="absolute top-[18%] left-0 lg:top-[28%] bg-white overflow-hidden shadow-2xl w-[11.25rem] sm:w-[11.875rem] md:w-[14.5rem] lg:w-[20rem] transform rotate-4 hover:-rotate-3 transition-transform z-20 rounded-sm">
           <div className="relative w-full aspect-[3/4]">
-            <video
-              {...videoAttrs}
+            <VideoWithFallback
+              src="/BuildItcan.mp4"
               poster="/BuildItcan-poster.jpg"
+              frameSrc="/frames/BuildItcan.png"
               className="w-full h-full object-cover"
-            >
-              <source src="/BuildItcan.webm" type="video/webm" />
-              <source src="/BuildItcan.mp4" type="video/mp4" />
-            </video>
+              videoAttrs={videoAttrs}
+            />
           </div>
         </div>
 
         <div className="absolute top-[48%] right-[55%] sm:right-[60%] md:right-[65%] lg:top-[68%] lg:right-[90%] bg-white overflow-hidden shadow-2xl w-[10.625rem] sm:w-[11.25rem] md:w-[14rem] lg:w-[20.625rem] transform -rotate-6 lg:rotate-6 hover:rotate-3 transition-transform z-30">
           <div className="relative w-full aspect-[6/7]">
-            <video
-              {...videoAttrs}
+            <VideoWithFallback
+              src="/builditshoes.mp4"
               poster="/builditshoes-poster.jpg"
+              frameSrc="/frames/builditshoes.png"
               className="w-full h-full object-cover"
-            >
-              <source src="/builditshoes.webm" type="video/webm" />
-              <source src="/builditshoes.mp4" type="video/mp4" />
-            </video>
+              videoAttrs={videoAttrs}
+            />
           </div>
         </div>
       </div>
