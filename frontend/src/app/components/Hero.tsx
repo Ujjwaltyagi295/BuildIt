@@ -16,15 +16,15 @@ export default function Hero() {
     <section className="relative h-screen flex items-start pt-12 px-8 lg:px-16 ">
       <div className="flex flex-col gap-6 lg:absolute lg:inset-0 w-full lg:w-auto z-10">
         <div className="lg:absolute lg:left-4 lg:top-12">
-          <h1 className="title2 font-bold leading-[0.85] tracking-tight text-[20vw] sm:text-[14vw] md:text-[12vw] lg:text-[180px]">
+          <h1 className="title2 -ml-4 sm:-ml-2 md:ml-0 lg:mr-0 font-bold leading-[0.85] tracking-tight text-[20vw] sm:text-[14vw] md:text-[12vw] lg:text-[180px]">
             Build.IT
             <br />
             agency
           </h1>
         </div>
 
-        <div className="lg:absolute lg:left-4 lg:bottom-[40%] max-w-sm md:max-w-md lg:max-w-xs mt-8 sm:mt-0">
-          <p className="font-semibold text-base sm:text-base md:text-lg lg:text-lg leading-tight uppercase">
+        <div className="lg:absolute lg:left-[6%] lg:bottom-32 xl:bottom-36 max-w-sm md:max-w-md lg:max-w-xs mt-8 sm:mt-0">
+          <p className="font-bold font-inter text-base sm:text-base md:text-lg lg:text-md leading-tight  uppercase">
             WE CREATE
             <br />
             WEBSITES AND BRANDS
@@ -36,7 +36,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="absolute top-[70%] left-[5%] sm:left-[1%] lg:left-[28%] lg:top-[50%] rotate-12 w-[13.75rem] h-[13.75rem] md:w-[10rem] md:h-[10rem] lg:w-[21.875rem] lg:h-[21.875rem] z-15">
+      <div className="absolute top-[70%] left-[5%] sm:left-[1%] lg:left-[28%] lg:top-[50%] rotate-12 w-[13.75rem] h-[13.75rem] md:w-[10rem] md:h-[10rem] lg:w-[21.875rem] lg:h-[21.875rem] z-25">
         <svg
           viewBox="0 0 200 200"
           fill="none"
@@ -57,7 +57,7 @@ export default function Hero() {
       </div>
 
       <div className="absolute top-[55%] right-[5%] md:top-[20%] sm:right-[8%] md:right-[3%] lg:top-[5%] lg:right-[8%] w-[17.5rem] sm:w-[18.75rem] md:w-[22rem] lg:w-[25rem] h-[34.375rem] sm:h-[35.625rem] md:h-[40rem] lg:h-[43.75rem] z-25">
-        <div className="absolute right-0 bottom-[55%] lg:bottom-[60%] bg-white overflow-hidden shadow-2xl w-[11.875rem] sm:w-[12.5rem] md:w-[15rem] lg:w-[19.375rem] transform -rotate-10 hover:rotate-8 transition-transform z-10">
+        <div className="absolute right-0 bottom-[55%] lg:bottom-[60%] bg-white overflow-hidden shadow-2xl w-[11.875rem] sm:w-[12.5rem] md:w-[15rem] lg:w-[19.375rem] transform -rotate-10  transition-transform z-10">
           <div className="relative w-full aspect-[3/4]">
             <Image
               src="/ThriftyfyMock.png"
@@ -70,28 +70,27 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="absolute top-[18%] left-0 lg:top-[28%] bg-white overflow-hidden shadow-2xl w-[11.25rem] sm:w-[11.875rem] md:w-[14.5rem] lg:w-[20rem] transform rotate-4 hover:-rotate-3 transition-transform z-20 rounded-sm">
+        <div className="absolute top-[18%] left-0 lg:top-[28%] bg-white overflow-hidden shadow-2xl w-[11.25rem] sm:w-[11.875rem] md:w-[14.5rem] lg:w-[20rem] transform rotate-4  transition-transform z-20 rounded-sm">
           <div className="relative w-full aspect-[3/4]">
             <video
               {...videoAttrs}
               poster="/BuildItcan-poster.jpg"
               className="w-full h-full object-cover"
             >
-              <source src="/BuildItcan.webm" type="video/webm" />
-              <source src="/BuildItcan.mp4" type="video/mp4" />
+              <source src="https://res.cloudinary.com/dnhnxjgmi/video/upload/v1762926870/Builditcan_jgheit.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
 
-        <div className="absolute top-[48%] right-[55%] sm:right-[60%] md:right-[65%] lg:top-[68%] lg:right-[90%] bg-white overflow-hidden shadow-2xl w-[10.625rem] sm:w-[11.25rem] md:w-[14rem] lg:w-[20.625rem] transform -rotate-6 lg:rotate-6 hover:rotate-3 transition-transform z-30">
+        <div className="absolute top-[48%] right-[55%] sm:right-[60%] md:right-[65%] lg:top-[68%] lg:right-[90%] bg-white overflow-hidden shadow-2xl w-[10.625rem] sm:w-[11.25rem] md:w-[14rem] lg:w-[20.625rem] transform -rotate-6 lg:rotate-6  transition-transform z-30">
           <div className="relative w-full aspect-[6/7]">
             <video
               {...videoAttrs}
               poster="/builditshoes-poster.jpg"
               className="w-full h-full object-cover"
             >
-              <source src="/builditshoes.webm" type="video/webm" />
-              <source src="/builditshoes.mp4" type="video/mp4" />
+              
+              <source src="https://res.cloudinary.com/dnhnxjgmi/video/upload/v1762926908/builditshoes_mdmtcz.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
