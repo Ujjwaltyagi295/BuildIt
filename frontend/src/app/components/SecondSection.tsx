@@ -1,25 +1,21 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import ScrollingText from "./ScrollingTex"
-import { useLayoutEffect, useRef, useEffect } from "react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { useLazyVideo } from "../lib/hooks/useLazyVideo"
+import { useLayoutEffect, useRef } from "react";
+import { CldVideoPlayer } from "next-cloudinary";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrollingText from "./ScrollingTex";
 
-
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
 export const SecondSection = () => {
-  const mainVidRef = useRef<HTMLDivElement>(null)
-  const blueCanRef = useRef<HTMLDivElement>(null)
-  const scrollTextRef = useRef<HTMLDivElement>(null)
-
-  const lazyVideoRef = useLazyVideo()
+  const mainVidRef = useRef(null);
+  const blueCanRef = useRef(null);
+  const scrollTextRef = useRef(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia()
+      const mm = gsap.matchMedia();
 
       mm.add("(min-width: 0px)", () => {
         if (mainVidRef.current) {
@@ -35,7 +31,7 @@ export const SecondSection = () => {
                 scrub: 0.1,
               },
             }
-          )
+          );
         }
 
         if (blueCanRef.current) {
@@ -51,7 +47,7 @@ export const SecondSection = () => {
                 scrub: 0.1,
               },
             }
-          )
+          );
         }
 
         if (scrollTextRef.current) {
@@ -67,20 +63,25 @@ export const SecondSection = () => {
                 scrub: 0.5,
               },
             }
-          )
+          );
         }
-      })
-    })
+      });
+    });
 
-    return () => ctx.revert()
-  }, [])
+    return () => ctx.revert();
+  }, []);
 
   const videoAttrs = {
     loop: true,
     muted: true,
     playsInline: true,
-    preload: "metadata" as const,
-  }
+    className: "w-full h-full rounded-sm object-cover",
+  };
+
+  const transformation = {
+    quality: "auto",
+    fetch_format: "auto",
+  };
 
   return (
     <div className="relative h-screen mt-8 sm:mt-12 md:mt-16 lg:mt-20 flex items-start px-4 sm:px-8 lg:px-16">
@@ -102,15 +103,14 @@ export const SecondSection = () => {
             transform transition-transform z-20"
         >
           <div className="relative w-full p-2 sm:p-3 md:p-4 lg:p-5 bg-black/20 aspect-[3/4]">
-            <video
-              ref={lazyVideoRef}
-              {...videoAttrs}
+            <CldVideoPlayer
+              width="auto"
+              height="auto"
+              src="mainvid_iyhvte"
               poster="/mainvid-poster.jpg"
-              className="w-full h-full rounded-sm object-cover"
-            >
-             
-              <source data-src="https://res.cloudinary.com/dnhnxjgmi/video/upload/v1762927713/mainvid_iyhvte.mp4" type="video/mp4" />
-            </video>
+              transformation={transformation}
+              {...videoAttrs}
+            />
           </div>
         </div>
 
@@ -124,14 +124,14 @@ export const SecondSection = () => {
             transform transition-transform z-30"
         >
           <div className="relative w-full aspect-[5/6]">
-            <video
-              ref={lazyVideoRef}
-              {...videoAttrs}
+            <CldVideoPlayer
+              width="auto"
+              height="auto"
+              src="bluecan_hriwce"
               poster="/bluecan-poster.jpg"
-              className="w-full h-full rounded-sm object-cover"
-            >
-              <source data-src="https://res.cloudinary.com/dnhnxjgmi/video/upload/v1762927946/bluecan_hriwce.mp4" type="video/mp4" />
-            </video>
+              transformation={transformation}
+              {...videoAttrs}
+            />
           </div>
         </div>
 
@@ -144,15 +144,14 @@ export const SecondSection = () => {
             transform -rotate-6 transition-transform z-20"
         >
           <div className="relative w-full aspect-[6/7]">
-            <video
-              ref={lazyVideoRef}
-              {...videoAttrs}
+            <CldVideoPlayer
+              width="auto"
+              height="auto"
+              src="fitnessweb_m2vmtu"
               poster="/fitnessweb-poster.jpg"
-              className="w-full h-full rounded-sm object-cover"
-            >
-              
-              <source data-src="https://res.cloudinary.com/dnhnxjgmi/video/upload/v1762927714/fitnessweb_m2vmtu.mp4" type="video/mp4" />
-            </video>
+              transformation={transformation}
+              {...videoAttrs}
+            />
           </div>
         </div>
       </div>
@@ -182,5 +181,5 @@ export const SecondSection = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
