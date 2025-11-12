@@ -1,8 +1,7 @@
 "use client"
 
-import Image from "next/image"
 import ScrollingText from "./ScrollingTex"
-import { useLayoutEffect, useRef, useEffect } from "react"
+import { useLayoutEffect, useRef } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useLazyVideo } from "../lib/hooks/useLazyVideo"
@@ -105,7 +104,6 @@ export const SecondSection = () => {
             <video
               ref={lazyVideoRef}
               {...videoAttrs}
-              poster="/mainvid-poster.jpg"
               className="w-full h-full rounded-sm object-cover"
             >
              
@@ -127,7 +125,6 @@ export const SecondSection = () => {
             <video
               ref={lazyVideoRef}
               {...videoAttrs}
-              poster="/bluecan-poster.jpg"
               className="w-full h-full rounded-sm object-cover"
             >
               <source data-src="https://res.cloudinary.com/dnhnxjgmi/video/upload/v1762927946/bluecan_hriwce.mp4" type="video/mp4" />
@@ -147,7 +144,6 @@ export const SecondSection = () => {
             <video
               ref={lazyVideoRef}
               {...videoAttrs}
-              poster="/fitnessweb-poster.jpg"
               className="w-full h-full rounded-sm object-cover"
             >
               
