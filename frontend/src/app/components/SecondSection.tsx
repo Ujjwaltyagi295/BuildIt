@@ -108,8 +108,8 @@ export const SecondSection = () => {
               poster="/mainvid-poster.jpg"
               className="w-full h-full rounded-sm object-cover"
             >
-              <source data-src="/mainvid.webm" type="video/webm" />
-              <source data-src="/mainvid.mp4" type="video/mp4" />
+             
+              <source data-src="https://res.cloudinary.com/dnhnxjgmi/video/upload/v1762927713/mainvid_iyhvte.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
@@ -130,8 +130,7 @@ export const SecondSection = () => {
               poster="/bluecan-poster.jpg"
               className="w-full h-full rounded-sm object-cover"
             >
-              <source data-src="/bluecan.webm" type="video/webm" />
-              <source data-src="/bluecan.mp4" type="video/mp4" />
+              <source data-src="https://res.cloudinary.com/dnhnxjgmi/video/upload/v1762927946/bluecan_hriwce.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
@@ -151,8 +150,8 @@ export const SecondSection = () => {
               poster="/fitnessweb-poster.jpg"
               className="w-full h-full rounded-sm object-cover"
             >
-              <source data-src="/fitnessweb.webm" type="video/webm" />
-              <source data-src="/fitnessweb.mp4" type="video/mp4" />
+              
+              <source data-src="https://res.cloudinary.com/dnhnxjgmi/video/upload/v1762927714/fitnessweb_m2vmtu.mp4" type="video/mp4" />
             </video>
           </div>
         </div>

@@ -9,9 +9,9 @@ export default function ProjectGrid() {
       id: 1,
       title: "Velour",
       subtitle: "Clothing brand, Website",
-      media: "/try.png",
+      media: "https://res.cloudinary.com/dnhnxjgmi/video/upload/v1762927410/try_xg9zgk.mp4",
       poster: "/try-poster.jpg",
-      type: "image",
+      type: "video",
       link: "https://velour-rho.vercel.app/",
     },
     {
