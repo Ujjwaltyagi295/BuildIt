@@ -1,106 +1,185 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import ScrollingText from "./ScrollingTex"
+import { useLayoutEffect, useRef } from "react";
+import { CldVideoPlayer } from "next-cloudinary";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrollingText from "./ScrollingTex";
 
-export default function Hero() {
+gsap.registerPlugin(ScrollTrigger);
+
+export const SecondSection = () => {
+  const mainVidRef = useRef(null);
+  const blueCanRef = useRef(null);
+  const scrollTextRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+
+      mm.add("(min-width: 0px)", () => {
+        if (mainVidRef.current) {
+          gsap.fromTo(
+            mainVidRef.current,
+            { rotation: -1 },
+            {
+              rotation: -16,
+              scrollTrigger: {
+                trigger: mainVidRef.current,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 0.1,
+              },
+            }
+          );
+        }
+
+        if (blueCanRef.current) {
+          gsap.fromTo(
+            blueCanRef.current,
+            { rotation: 6 },
+            {
+              rotation: 16,
+              scrollTrigger: {
+                trigger: blueCanRef.current,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 0.1,
+              },
+            }
+          );
+        }
+
+        if (scrollTextRef.current) {
+          gsap.fromTo(
+            scrollTextRef.current,
+            { x: "0%" },
+            {
+              x: "-50%",
+              scrollTrigger: {
+                trigger: scrollTextRef.current,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 0.5,
+              },
+            }
+          );
+        }
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   const videoAttrs = {
-    autoPlay: true,
     loop: true,
     muted: true,
     playsInline: true,
-    preload: "auto" as const,
-  }
+    className: "w-full h-full rounded-sm object-cover",
+  };
+
+  const transformation = {
+    quality: "auto",
+    fetch_format: "auto",
+  };
 
   return (
-    <section className="relative h-screen flex items-start pt-12 px-8 lg:px-16 ">
-      <div className="flex flex-col gap-6 lg:absolute lg:inset-0 w-full lg:w-auto z-10">
-        <div className="lg:absolute lg:left-4 lg:top-12">
-          <h1 className="title2 -ml-4 sm:-ml-2 md:ml-0 lg:mr-0 font-bold leading-[0.85] tracking-tight text-[20vw] sm:text-[14vw] md:text-[12vw] lg:text-[180px]">
-            Build.IT
-            <br />
-            agency
-          </h1>
-        </div>
-
-        <div className="lg:absolute lg:left-[6%] lg:bottom-32 xl:bottom-36 max-w-sm md:max-w-md lg:max-w-xs mt-8 sm:mt-0">
-          <p className="font-bold font-inter text-base sm:text-base md:text-lg lg:text-md leading-tight  uppercase">
-            WE CREATE
-            <br />
-            WEBSITES AND BRANDS
-            <br />
-            PEOPLE REMEMBER.
-            <br />
-            NOT JUST SCROLL PAST.
-          </p>
-        </div>
-      </div>
-
-      <div className="absolute top-[70%] left-[5%] sm:left-[1%] lg:left-[28%] lg:top-[50%] rotate-12 w-[13.75rem] h-[13.75rem] md:w-[10rem] md:h-[10rem] lg:w-[21.875rem] lg:h-[21.875rem] z-25">
-        <svg
-          viewBox="0 0 200 200"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-full"
+    <div className="relative h-screen mt-8 sm:mt-12 md:mt-16 lg:mt-20 flex items-start px-4 sm:px-8 lg:px-16">
+      <div
+        className="absolute 
+          top-[20%] sm:top-[18%] md:top-[8%] lg:top-[4%] 
+          right-[3%] sm:right-[6%] md:right-[4%] lg:right-[8%] 
+          w-[75vw] sm:w-[65vw] md:w-[22rem] lg:w-[25rem] 
+          h-[85vh] sm:h-[75vh] md:h-[40rem] lg:h-[43.75rem] 
+          z-25"
+      >
+        <div
+          ref={mainVidRef}
+          className="absolute 
+            right-[40%] sm:right-[25%] md:right-[18%] lg:right-[15%]
+            bottom-[-30%] sm:bottom-[-150%] md:bottom-[-58%] lg:bottom-[-60%]
+            bg-white overflow-hidden shadow-2xl 
+            w-[65vw] sm:w-[55vw] md:w-[18rem] lg:w-[32rem] 
+            transform transition-transform z-20"
         >
-          <circle cx="100" cy="100" r="95" stroke="#c5ee5b" strokeWidth="12" fill="none" />
-          <ellipse cx="70" cy="80" rx="15" ry="25" fill="#c5ee5b" />
-          <ellipse cx="130" cy="80" rx="15" ry="25" fill="#c5ee5b" />
-          <path
-            d="M 60 120 Q 100 150 140 120"
-            stroke="#c5ee5b"
-            strokeWidth="8"
-            strokeLinecap="round"
-            fill="none"
-          />
-        </svg>
-      </div>
-
-      <div className="absolute top-[55%] right-[5%] md:top-[20%] sm:right-[8%] md:right-[3%] lg:top-[5%] lg:right-[8%] w-[17.5rem] sm:w-[18.75rem] md:w-[22rem] lg:w-[25rem] h-[34.375rem] sm:h-[35.625rem] md:h-[40rem] lg:h-[43.75rem] z-25">
-        <div className="absolute right-0 bottom-[55%] lg:bottom-[60%] bg-white overflow-hidden shadow-2xl w-[11.875rem] sm:w-[12.5rem] md:w-[15rem] lg:w-[19.375rem] transform -rotate-10  transition-transform z-10">
-          <div className="relative w-full aspect-[3/4]">
-            <Image
-              src="/ThriftyfyMock.png"
-              alt="Thriftyfy Project"
-              width={280}
-              height={373}
-              className="w-full h-full object-cover"
-              priority
+          <div className="relative w-full p-2 sm:p-3 md:p-4 lg:p-5 bg-black/20 aspect-[3/4]">
+            <CldVideoPlayer
+              width="auto"
+              height="auto"
+              src="mainvid_iyhvte"
+              poster="/mainvid-poster.jpg"
+              transformation={transformation}
+              {...videoAttrs}
             />
           </div>
         </div>
 
-        <div className="absolute top-[18%] left-0 lg:top-[28%] bg-white overflow-hidden shadow-2xl w-[11.25rem] sm:w-[11.875rem] md:w-[14.5rem] lg:w-[20rem] transform rotate-4  transition-transform z-20 rounded-sm">
-          <div className="relative w-full aspect-[3/4]">
-            <video
+        <div
+          ref={blueCanRef}
+          className="absolute 
+            top-[50%] sm:top-[75%] md:top-[58%] lg:top-[35%]
+            right-[0%] sm:right-[5%] md:right-[80%] lg:right-[140%]
+            bg-white overflow-hidden shadow-2xl 
+            w-[58vw] sm:w-[52vw] md:w-[16rem] lg:w-[29rem] 
+            transform transition-transform z-30"
+        >
+          <div className="relative w-full aspect-[5/6]">
+            <CldVideoPlayer
+              width="auto"
+              height="auto"
+              src="bluecan_hriwce"
+              poster="/bluecan-poster.jpg"
+              transformation={transformation}
               {...videoAttrs}
-              poster="/BuildItcan-poster.jpg"
-              className="w-full h-full object-cover"
-            >
-              <source src="https://res.cloudinary.com/dnhnxjgmi/video/upload/v1762926870/Builditcan_jgheit.mp4" type="video/mp4" />
-            </video>
+            />
           </div>
         </div>
 
-        <div className="absolute top-[48%] right-[55%] sm:right-[60%] md:right-[65%] lg:top-[68%] lg:right-[90%] bg-white overflow-hidden shadow-2xl w-[10.625rem] sm:w-[11.25rem] md:w-[14rem] lg:w-[20.625rem] transform -rotate-6 lg:rotate-6  transition-transform z-30">
+        <div
+          className="absolute 
+            top-[18%] sm:top-[15%] md:top-[16%] lg:top-[5%]
+            right-[48%] sm:right-[55%] md:right-[140%] lg:right-[250%]
+            bg-white overflow-hidden shadow-2xl 
+            w-[52vw] sm:w-[48vw] md:w-[15rem] lg:w-[20.625rem] 
+            transform -rotate-6 transition-transform z-20"
+        >
           <div className="relative w-full aspect-[6/7]">
-            <video
+            <CldVideoPlayer
+              width="auto"
+              height="auto"
+              src="fitnessweb_m2vmtu"
+              poster="/fitnessweb-poster.jpg"
+              transformation={transformation}
               {...videoAttrs}
-              poster="/builditshoes-poster.jpg"
-              className="w-full h-full object-cover"
-            >
-              
-              <source src="https://res.cloudinary.com/dnhnxjgmi/video/upload/v1762926908/builditshoes_mdmtcz.mp4" type="video/mp4" />
-            </video>
+            />
           </div>
         </div>
       </div>
 
       <ScrollingText
-        textClassName="leading-5"
-        containerClassName="absolute bottom-3 left-0 w-full bg-[#e6e6e6] text-black py-4 overflow-hidden z-20"
-        text="WEB DEVELOPMENT — APP DESIGN — BRAND STRATEGY — SOCIAL MEDIA MANAGEMENT — CREATIVE AGENCY — UI/UX DESIGN — DIGITAL MARKETING — INNOVATION — IDENTITY — GROWTH — CONTENT CREATION — BUILD IT —"
+        textClassName="leading-tight sm:leading-5"
+        containerClassName="absolute 
+          bottom-[38%] sm:bottom-[42%] md:bottom-[46%] lg:bottom-[50%] 
+          title2 -rotate-1 left-0 w-full bg-[#e6e6e6] text-black 
+          py-1.5 sm:py-2.5 md:py-3.5 lg:py-4 overflow-hidden z-20"
+        text="BUILD IT — BUILD IT — BUILD IT — BUILD IT — BUILD IT — BUILD IT — BUILD IT — BUILD IT — BUILD IT — BUILD IT — BUILD IT — BUILD IT —"
       />
-    </section>
-  )
-}
+
+      <div
+        className="absolute 
+          bottom-[-75%] sm:bottom-[-70%] md:bottom-[-40%] lg:bottom-[-30%]
+          title2 -rotate-4 left-0 w-full bg-[#e6e6e6] text-black 
+          py-1.5 sm:py-2.5 md:py-3.5 lg:py-4 overflow-hidden z-20"
+      >
+        <div ref={scrollTextRef} className="flex whitespace-nowrap">
+          <span
+            className="title3 inline-block"
+            style={{ fontSize: "clamp(5rem, 12vw, 16rem)" }}
+          >
+            A DESIGN AND TECHNOLOGY STUDIO — A DESIGN AND TECHNOLOGY STUDIO —
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
