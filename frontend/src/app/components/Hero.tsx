@@ -74,7 +74,7 @@ export default function Hero() {
           <div className="relative w-full aspect-[3/4]">
             <video
               {...videoAttrs}
-              poster="/BuildItcan-poster.jpg"
+           
               className="w-full h-full object-cover"
             >
               <source src="https://res.cloudinary.com/dnhnxjgmi/video/upload/v1762926870/Builditcan_jgheit.mp4" type="video/mp4" />
@@ -86,7 +86,7 @@ export default function Hero() {
           <div className="relative w-full aspect-[6/7]">
             <video
               {...videoAttrs}
-              poster="/builditshoes-poster.jpg"
+           
               className="w-full h-full object-cover"
             >
               
