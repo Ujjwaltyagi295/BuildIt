@@ -1,4 +1,4 @@
-"use client"
+
 
 import Image from "next/image"
 import ScrollingText from "./ScrollingTex"
@@ -17,7 +17,7 @@ export default function Hero() {
       <div className="flex flex-col gap-6 lg:absolute lg:inset-0 w-full lg:w-auto z-10">
         <div className="lg:absolute lg:left-4 lg:top-12">
           <h1 className="title2 -ml-4 sm:-ml-2 md:ml-0 lg:mr-0 font-bold leading-[0.85] tracking-tight text-[20vw] sm:text-[14vw] md:text-[12vw] lg:text-[180px]">
-            Build.IT
+            Build IT
             <br />
             agency
           </h1>

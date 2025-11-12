@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Anton, Geist, Geist_Mono, Inter_Tight } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import SmoothScroll from "./components/SmoothScroll"; 
 
 const Integrated = localFont({
   src: [{ path: "./fonts/Integrated.otf", weight: "400", style: "normal" }],
@@ -20,7 +21,11 @@ const Helvetica = localFont({
 
 const ppMonument = localFont({
   src: [
-    { path: "./fonts/MonumentExtended-Regular.otf", weight: "400", style: "normal" },
+    {
+      path: "./fonts/MonumentExtended-Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
   ],
   variable: "--font-pp-monument",
   display: "swap",
@@ -47,15 +52,21 @@ const inter = Inter_Tight({
   subsets: ["latin"],
 });
 
+
 export const metadata: Metadata = {
   title: "Build It | Tech Agency for Web, App & Digital Growth",
   description:
-    "Build It is a creative tech agency that builds websites, apps, and digital experiences. We also offer social media management and content creation to help your brand grow online.",
+    "Build It is a tech agency specializing in web development, app development, digital marketing, UI/UX design, and social media management. At Build It, we create websites, apps, and digital strategies that help brands grow online through creative design, content creation, and data-driven solutions.",
   keywords: [
     "build",
-     "buildit service",,
-     "buildit",
+    "buildit service",
+    "buildit",
     "build it",
+    "build it agency",
+    "build it tech",
+    "build it web development",
+    "build it app development",
+    "build it digital marketing",
     "tech agency",
     "web development",
     "app development",
@@ -63,15 +74,37 @@ export const metadata: Metadata = {
     "social media management",
     "content creation",
     "UI/UX design",
+    "branding",
+    "creative agency",
     "Build It",
     "Build It Service",
+    "Build It Tech Agency",
+    "custom website design",
+    "responsive web design",
+    "e-commerce development",
+    "SaaS product development",
+    "mobile app design",
+    "iOS app development",
+    "Android app development",
+    "full-stack development",
+    "front-end development",
+    "back-end development",
+    "search engine optimization",
+    "SEO services",
+    "PPC management",
+    "online advertising",
+    "lead generation",
+    "conversion rate optimization",
+    "digital growth solutions",
+    "website redesign services",
+    "tech agency for startups",
   ],
   authors: [{ name: "Build It", url: "https://builditservice.com" }],
   metadataBase: new URL("https://builditservice.com"),
   openGraph: {
     title: "Build It | Tech Agency for Web, App & Digital Growth",
     description:
-      "We design and develop custom web and app solutions, manage social media, and create digital content that drives growth.",
+      "Build It designs and develops custom websites, apps, and digital marketing solutions. We help businesses grow online through design, content, and strategy.",
     url: "https://builditservice.com",
     siteName: "Build It",
     images: [
@@ -89,8 +122,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Build It | Tech Agency for Web, App & Digital Growth",
     description:
-      "Build It builds apps, websites, and digital strategies for brands that want to grow.",
-    creator: "@builditservice", 
+      "Build It builds apps, websites, and digital marketing strategies that help brands scale online.",
+    creator: "@builditservice",
     images: ["/og-image.jpg"],
   },
   icons: {
@@ -103,6 +136,7 @@ export const metadata: Metadata = {
   },
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -113,7 +147,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${Helvetica.variable} ${inter.variable} ${anton.variable} ${Integrated.variable} ${ppMonument.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );
